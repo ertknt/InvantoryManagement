@@ -19,9 +19,9 @@ namespace Manager
             float capacity = 104;
             float totalWeight = 0;
             List<Package> packageList = new List<Package>();
-            List<Package> packageListOrderedByDescendingWeight = (from p in _packageContext.Packages orderby p.Price descending select p).ToList();
+            List<Package> packageListOrderedByDescendingUnitPrice = (from p in _packageContext.Packages orderby p.UnitPrice descending select p).ToList();
 
-            foreach (var package in packageListOrderedByDescendingWeight)
+            foreach (var package in packageListOrderedByDescendingUnitPrice)
             {
                 if (totalWeight + package.Weight <= capacity)
                 {
@@ -33,14 +33,10 @@ namespace Manager
 
             return packageList;
         }
-
-        public IEnumerable<Package> GetPreviousShipments()
-        {
-            return (from p in _packageContext.Packages orderby p.Id descending select p).ToList();
-        }
-
         public int InsertPackage(Package entity)
         {
+            entity.UnitPrice = entity.Price / entity.Weight;
+
             _packageContext.Packages.Add(entity);
 
             return _packageContext.SaveChanges();

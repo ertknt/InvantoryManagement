@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public interface IDataRepository<TEntity>
+    public interface IShipmentRepository<TEntity>
     {
-        IEnumerable<TEntity> GetOptimalShipment();
-        int InsertPackage(TEntity entity);
+        IEnumerable<TEntity> GetPreviousShipments();
     }
 }

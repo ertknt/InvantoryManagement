@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Context.cs" />
     <Compile Include="Model\Package.cs" />
+    <Compile Include="Model\Shipment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

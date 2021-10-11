@@ -19,21 +19,6 @@ namespace InvantoryManagement.Controllers
             _dataRepository = dataRepository;
         }
 
-        //Hava yolu şirketinin yapmış olduğu bütün gönderimlerin listesini döner.
-        [Route("api/package/getPreviousShipments")]
-        [HttpGet]
-        public ResultModel<List<Package>> GetPreviousShipments()
-        {
-            IEnumerable<Package> packageList = _dataRepository.GetPreviousShipments();
-
-            return new ResultModel<List<Package>>
-            {
-                Data = packageList.ToList(),
-                StatusCode = 200,
-                Status = true,
-            };
-        }
-
         /*
          Hava yolu şirketinin bir gönderim için kargo uçağında sahip olduğu kapasite 
         maksimum 104 kg ‘dir. Bu web servis; depo envanterinde bulunan paketlerden 104 kg’i 
@@ -43,7 +28,6 @@ namespace InvantoryManagement.Controllers
          */
         [Route("api/package/getOptimalShipment")]
         [HttpGet]
-        // GET api/values/5
         public ResultModel<List<Package>> GetOptimalShipment(int id)
         {
             IEnumerable<Package> packageList = _dataRepository.GetOptimalShipment();
@@ -59,7 +43,6 @@ namespace InvantoryManagement.Controllers
         //Ağırlık ve fiyat değerlerine sahip pake6 depo envanterine kaydeder.
         [Route("api/package/post")]
         [HttpPost]
-        // POST api/values
         public ResultModel InsertPackage([FromBody] Package package)
         {
             int result = _dataRepository.InsertPackage(package);

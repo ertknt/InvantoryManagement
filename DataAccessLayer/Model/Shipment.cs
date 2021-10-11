@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Model
 {
-    public class Package
+    public class Shipment
     {
         public int Id { get; set; }
-        public float Weight { get; set; }
-        public float Price { get; set; }
-        public float UnitPrice { get; set; }
+        public int PackageId { get; set; }
     }
 }
