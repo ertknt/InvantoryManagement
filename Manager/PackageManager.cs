@@ -19,7 +19,7 @@ namespace Manager
             float capacity = 104;
             float totalWeight = 0;
             List<Package> packageList = new List<Package>();
-            List<Package> packageListOrderedByDescendingUnitPrice = (from p in _packageContext.Packages orderby p.UnitPrice descending select p).ToList();
+            List<Package> packageListOrderedByDescendingUnitPrice = (from p in _packageContext.Packages where p.Status == 1 orderby p.Price/p.Weight descending select p).ToList();
 
             foreach (var package in packageListOrderedByDescendingUnitPrice)
             {
@@ -27,7 +27,8 @@ namespace Manager
                 {
                     packageList.Add(package);
                     totalWeight += package.Weight;
-                    _packageContext.Packages.Remove(package);
+                    package.Status = 2;
+                    _packageContext.SaveChanges();
                 }
             }
 
@@ -35,7 +36,7 @@ namespace Manager
         }
         public int InsertPackage(Package entity)
         {
-            entity.UnitPrice = entity.Price / entity.Weight;
+            entity.Status = 1;
 
             _packageContext.Packages.Add(entity);
 

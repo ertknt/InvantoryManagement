@@ -11,6 +11,6 @@ namespace DataAccessLayer.Model
         public int Id { get; set; }
         public float Weight { get; set; }
         public float Price { get; set; }
-        public float UnitPrice { get; set; }
+        public int Status { get; set; }
     }
 }
